@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "Db311": "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\starg\\source\\repos\\DataManagment-311\\Database1.mdf;Integrated Security=True"
+  }
+}
