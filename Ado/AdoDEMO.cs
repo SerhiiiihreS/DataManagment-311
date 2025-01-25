@@ -1,4 +1,5 @@
-﻿using DataManagement_311.Ado;
+﻿using Dapper;
+using DataManagement_311.Ado;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -52,8 +53,8 @@ namespace DataManagment_311.Ado
             //CreateTable(); 
             //InsertData();
             using SqlCommand cmd = new();
-            cmd.Connection = sqlconnection; 
-            cmd.CommandText= "SELECT*FROM UserRoles";
+            cmd.Connection = sqlconnection;
+            cmd.CommandText = "SELECT*FROM UserRoles";
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -67,23 +68,80 @@ namespace DataManagment_311.Ado
             using (SqlCommand cmd2 = new())
             {
                 cmd2.Connection = sqlconnection;
-                cmd2.CommandText = "SELECT TOP 1*FROM UserRoles";
+                cmd2.CommandText = "SELECT TOP 1 *FROM UserRoles";
                 using SqlDataReader reader2 = cmd2.ExecuteReader();
                 reader2.Read();
-                UserRole ur= new()
+                UserRole ur = new()
                 {
-                    Id          = reader2.GetString("Id"),
+                    Id = reader2.GetString("Id"),
                     Description = reader2.GetString("Description"),
-                    CanCreate   = reader2.GetInt32("CanCreate"),
-                    CanRead     = reader2.GetInt32("CanRead"),
-                    CanUpdate   = reader2.GetInt32("CanUpdate"),
-                    CanDelete   = reader2.GetInt32("CanDelete"),
+                    CanCreate = reader2.GetInt32("CanCreate"),
+                    CanRead = reader2.GetInt32("CanRead"),
+                    CanUpdate = reader2.GetInt32("CanUpdate"),
+                    CanDelete = reader2.GetInt32("CanDelete"),
                 };
                 Console.WriteLine(ur);
             }
+            DapperDemo();
+        }
 
+
+           private void DapperDemo()
+        {
+            String sql = "SELECT COUNT(*) FROM UserRoles";
+            var cnt = sqlconnection.ExecuteScalar(sql);
+            sql = "SELECT CURRENT_TIMESTAMP";
+            DateTime dt= sqlconnection.ExecuteScalar<DateTime>(sql);
+            Console.WriteLine($"In DB there {cnt} roles at {dt}");
+
+            UserRole ur1=
+            sqlconnection.QuerySingle<UserRole>("SELECT TOP 1 *FROM UserRoles");
+
+            Console.WriteLine(ur1);
+            Console.WriteLine("________________________________"); 
+             ur1 =
+            sqlconnection.QueryFirst<UserRole>("SELECT TOP 2 *FROM UserRoles");
+            Console.WriteLine(ur1);
+            var ur2= sqlconnection.QueryFirstOrDefault<UserRole>(
+                "SELECT  *FROM UserRoles WHERE Id='undefined'");
+            Console.WriteLine(ur2?.ToString()??"No data");
+            Console.WriteLine("________________________________");
+            var roles= sqlconnection.Query<UserRole>("SELECT *FROM UserRoles");
+            foreach(UserRole r in roles)
+            {
+                Console.WriteLine(r);
+            }
+
+            Console.WriteLine("________________________________");
+            Console.WriteLine(
+            sqlconnection.QuerySingleOrDefault<UserRole>(
+                "SELECT *FROM UserRoles WHERE Id = @RoleId",
+                new {RoleId="moderator"}
+                ));
+
+            Console.WriteLine("________________________________");
+
+            foreach (UserRole r in sqlconnection.Query<UserRole>(
+                "SELECT *FROM UserRoles WHERE Id IN @RoleIds",
+                new { RoleIds = new String[] { "moderator", "guest" } }
+                )) {
+                Console.WriteLine(r);
+            }
+
+            Console.WriteLine("________________________________");
+
+            foreach (UserRole r in sqlconnection.Query<UserRole>(
+                "SELECT *FROM UserRoles WHERE CanRead=@read AND CanUpdate=@update",
+                new { read=1, update=1 }
+                ))
+            {
+                Console.WriteLine(r);
+            }
 
         }
+
+
+
         private void InsertData()
         {
             try
