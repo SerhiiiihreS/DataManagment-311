@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using DataManagement_311.Ado;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -53,15 +54,35 @@ namespace DataManagment_311.Ado
             using SqlCommand cmd = new();
             cmd.Connection = sqlconnection; 
             cmd.CommandText= "SELECT*FROM UserRoles";
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read()) 
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                Console.WriteLine("Id - {0}, Descr - {1}",
-                    reader.GetString("Id"),
-                    reader["Description"]);
+                while (reader.Read())
+                {
+                    Console.WriteLine("Id - {0}, Descr - {1}",
+                        reader.GetString("Id"),
+                        reader["Description"]);
+                }
+            }
+            //orm 
+            using (SqlCommand cmd2 = new())
+            {
+                cmd2.Connection = sqlconnection;
+                cmd2.CommandText = "SELECT TOP 1*FROM UserRoles";
+                using SqlDataReader reader2 = cmd2.ExecuteReader();
+                reader2.Read();
+                UserRole ur= new()
+                {
+                    Id          = reader2.GetString("Id"),
+                    Description = reader2.GetString("Description"),
+                    CanCreate   = reader2.GetInt32("CanCreate"),
+                    CanRead     = reader2.GetInt32("CanRead"),
+                    CanUpdate   = reader2.GetInt32("CanUpdate"),
+                    CanDelete   = reader2.GetInt32("CanDelete"),
+                };
+                Console.WriteLine(ur);
             }
 
-       
+
         }
         private void InsertData()
         {
