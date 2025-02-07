@@ -12,7 +12,7 @@ namespace DataManagment_311.EF.Entities
         public String Description { get; set; } = null!;
         public int CanCreate { get; set; }
         public int CanRead { get; set; }
-        public int CanUpdate { get; set; }
+        public int CanUpdate { get;   set; }
         public int CanDelete { get; set; }
 
         public override string ToString()

@@ -4,6 +4,7 @@ using DataManagment_311.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataManagment_311.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250205184915_Seeding1")]
+    partial class Seeding1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,30 +210,12 @@ namespace DataManagment_311.Migrations
                         },
                         new
                         {
-                            Id = new Guid("75217169-694b-48ff-945b-7ba42d9d2d49"),
+                            Id = new Guid("c2ae1d8c-da5d-4ea6-9458-e859f15f002a"),
                             Dk = "12345123",
-                            Login = "user7",
+                            Login = "user5-e",
                             RoleId = "editor",
                             Salt = "12345",
-                            UserId = new Guid("a1aad69c-8bb7-4119-b7fd-fb5e512f9625")
-                        },
-                        new
-                        {
-                            Id = new Guid("56c47e75-db11-46c5-8e65-8427b705f50a"),
-                            Dk = "12345123",
-                            Login = "user8",
-                            RoleId = "editor",
-                            Salt = "12345",
-                            UserId = new Guid("1b6628fc-4b91-4b3b-a388-89db7c07a153")
-                        },
-                        new
-                        {
-                            Id = new Guid("b98990e0-667e-4eb0-9f22-86f4948c112e"),
-                            Dk = "12345123",
-                            Login = "user6",
-                            RoleId = "editor",
-                            Salt = "12345",
-                            UserId = new Guid("20f46919-d7bf-477e-919a-4aaddd7e6852")
+                            UserId = new Guid("449a3602-c38b-45d8-a33b-76a88085aba2")
                         });
                 });
 
@@ -291,41 +276,6 @@ namespace DataManagment_311.Migrations
                             Email = "user5@i.ua",
                             Name = "Stepan",
                             Phone = "555-11-55"
-                        },
-                        new
-                        {
-                            Id = new Guid("6a5aa914-d6c6-4a16-b9a1-87066a76b495"),
-                            Email = "user6@i.ua",
-                            Name = "Stephanie",
-                            Phone = "333-11-55"
-                        },
-                        new
-                        {
-                            Id = new Guid("e1e681e0-3dee-41df-b67d-b5db908fa1f6"),
-                            Email = "user7@i.ua",
-                            Name = "Antonina",
-                            Phone = "333-11-55"
-                        },
-                        new
-                        {
-                            Id = new Guid("a1aad69c-8bb7-4119-b7fd-fb5e512f9625"),
-                            Email = "user8@i.ua",
-                            Name = "Afanasy",
-                            Phone = "222-11-55"
-                        },
-                        new
-                        {
-                            Id = new Guid("1b6628fc-4b91-4b3b-a388-89db7c07a153"),
-                            Email = "user9@i.ua",
-                            Name = "Nikolay",
-                            Phone = "123-11-55"
-                        },
-                        new
-                        {
-                            Id = new Guid("20f46919-d7bf-477e-919a-4aaddd7e6852"),
-                            Email = "user10@i.ua",
-                            Name = "Valentine",
-                            Phone = "234-11-55"
                         });
                 });
 
@@ -362,7 +312,7 @@ namespace DataManagment_311.Migrations
                             CanDelete = 0,
                             CanRead = 0,
                             CanUpdate = 0,
-                            Description = "Self-registration of koristuvach"
+                            Description = "Самостійно зареєстрований користувач"
                         },
                         new
                         {
@@ -371,7 +321,7 @@ namespace DataManagment_311.Migrations
                             CanDelete = 0,
                             CanRead = 1,
                             CanUpdate = 1,
-                            Description = "With the right to edit content"
+                            Description = "З правом редагування контенту"
                         },
                         new
                         {
@@ -380,7 +330,7 @@ namespace DataManagment_311.Migrations
                             CanDelete = 1,
                             CanRead = 1,
                             CanUpdate = 1,
-                            Description = "Database administrator"
+                            Description = "Адміністратор БД"
                         },
                         new
                         {
@@ -389,7 +339,7 @@ namespace DataManagment_311.Migrations
                             CanDelete = 1,
                             CanRead = 1,
                             CanUpdate = 0,
-                            Description = "With the right to block content"
+                            Description = "З правом блокування контенту"
                         });
                 });
 #pragma warning restore 612, 618

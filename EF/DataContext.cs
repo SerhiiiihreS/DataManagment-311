@@ -38,43 +38,79 @@ namespace DataManagment_311.EF
                 {
                     Id = Guid.Parse("D4E7F2A5-188C-48F5-9DB6-6D8999ED5E42"),
                     Email = "user1@i.ua",
-                    Name = "user1",
+                    Name = "Ivan",
                     Phone = "555-11-11"
                 },
                 new Entities.UserData()
                 {
                     Id = Guid.Parse("14B16781-27BE-4FB4-804E-803C5A98E986"),
                     Email = "user2@i.ua",
-                    Name = "user2",
+                    Name = "Sergey",
                     Phone = "555-11-22"
                 },
                 new Entities.UserData()
                 {
                     Id = Guid.Parse("9CAB7A6A-E970-44AE-8E73-58005DCE3A01"),
                     Email = "user3@i.ua",
-                    Name = "user3",
+                    Name = "Ilona",
                     Phone = "555-11-33"
                 },
                 new Entities.UserData()
                 {
                     Id = Guid.Parse("ECF36CEB-C0D5-4107-9E02-B43F8967038E"),
                     Email = "user4@i.ua",
-                    Name = "user4",
+                    Name = "Marina",
                     Phone = "555-11-44"
                 },
                 new Entities.UserData()
                 {
                     Id = Guid.Parse("449A3602-C38B-45D8-A33B-76A88085ABA2"),
                     Email = "user5@i.ua",
-                    Name = "user5",
+                    Name = "Stepan",
                     Phone = "555-11-55"
-                }
+                },
+                 new Entities.UserData()
+                 {
+                     Id = Guid.Parse("6A5AA914-D6C6-4A16-B9A1-87066A76B495"),
+                     Email = "user6@i.ua",
+                     Name = "Stephanie",
+                     Phone = "333-11-55"
+                 },
+                  new Entities.UserData()
+                  {
+                      Id = Guid.Parse("E1E681E0-3DEE-41DF-B67D-B5DB908FA1F6"),
+                      Email = "user7@i.ua",
+                      Name = "Antonina",
+                      Phone = "333-11-55"
+                  },
+                   new Entities.UserData()
+                   {
+                       Id = Guid.Parse("A1AAD69C-8BB7-4119-B7FD-FB5E512F9625"),
+                       Email = "user8@i.ua",
+                       Name = "Afanasy",
+                       Phone = "222-11-55"
+                   },
+                    new Entities.UserData()
+                    {
+                        Id = Guid.Parse("1B6628FC-4B91-4B3B-A388-89DB7C07A153"),
+                        Email = "user9@i.ua",
+                        Name = "Nikolay",
+                        Phone = "123-11-55"
+                    },
+                     new Entities.UserData()
+                     {
+                         Id = Guid.Parse("20F46919-D7BF-477E-919A-4AADDD7E6852"),
+                         Email = "user10@i.ua",
+                         Name = "Valentine",
+                         Phone = "234-11-55"
+                     }
+
             );
             modelBuilder.Entity<Entities.UserRole>().HasData(
                 new Entities.UserRole()
                 {
                     Id = "guest",
-                    Description = "Самостійно зареєстрований користувач",
+                    Description = "Self-registration of koristuvach",
                     CanCreate = 0,
                     CanRead = 0,
                     CanUpdate = 0,
@@ -83,7 +119,7 @@ namespace DataManagment_311.EF
                 new Entities.UserRole()
                 {
                     Id = "editor",
-                    Description = "З правом редагування контенту",
+                    Description = "With the right to edit content",
                     CanCreate = 0,
                     CanRead = 1,
                     CanUpdate = 1,
@@ -92,7 +128,7 @@ namespace DataManagment_311.EF
                 new Entities.UserRole()
                 {
                     Id = "admin",
-                    Description = "Адміністратор БД",
+                    Description = "Database administrator",
                     CanCreate = 1,
                     CanRead = 1,
                     CanUpdate = 1,
@@ -101,7 +137,7 @@ namespace DataManagment_311.EF
                 new Entities.UserRole()
                 {
                     Id = "moderator",
-                    Description = "З правом блокування контенту",
+                    Description = "With the right to block content",
                     CanCreate = 0,
                     CanRead = 1,
                     CanUpdate = 0,
@@ -185,13 +221,31 @@ namespace DataManagment_311.EF
                 },
                 new Entities.UserAccess()
                 {
-                    Id = Guid.Parse("C2AE1D8C-DA5D-4EA6-9458-E859F15F002A"),
-                    UserId = Guid.Parse("449A3602-C38B-45D8-A33B-76A88085ABA2"),
+                    Id = Guid.Parse("75217169-694B-48FF-945B-7BA42D9D2D49"),
+                    UserId = Guid.Parse("A1AAD69C-8BB7-4119-B7FD-FB5E512F9625"),
                     RoleId = "editor",
-                    Login = "user5-e",
+                    Login = "user7",
                     Salt = Salt,
                     Dk = Salt + DefaultPassword,
-                }
+                },
+                new Entities.UserAccess()
+                 {
+                     Id = Guid.Parse("56C47E75-DB11-46C5-8E65-8427B705F50A"),
+                     UserId = Guid.Parse("1B6628FC-4B91-4B3B-A388-89DB7C07A153"),
+                     RoleId = "editor",
+                     Login = "user8",
+                     Salt = Salt,
+                     Dk = Salt + DefaultPassword,
+                 },
+                new Entities.UserAccess()
+                  {
+                      Id = Guid.Parse("B98990E0-667E-4EB0-9F22-86F4948C112E"),
+                      UserId = Guid.Parse("20F46919-D7BF-477E-919A-4AADDD7E6852"),
+                      RoleId = "editor",
+                      Login = "user6",
+                      Salt = Salt,
+                      Dk = Salt + DefaultPassword,
+                  }
             );
         }
     }

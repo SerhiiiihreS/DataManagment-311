@@ -12,5 +12,10 @@ namespace DataManagment_311.EF.Entities
         public String Name { get; set; } = null!;
         public String Email { get; set; } = null!;
         public String Phone { get; set; } = null!;
+
+        public override string ToString()
+        {
+            return $"UserData: Id({Id}), Name({Name}),Email({Email}), Phone({Phone})";
+        }
     }
 }
