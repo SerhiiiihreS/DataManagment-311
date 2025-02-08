@@ -208,14 +208,16 @@ namespace DataManagment_311.EF
             Console.WriteLine($"The phone on 555 starts with - {cnt11} - users");
             Console.WriteLine("________________________________");
             Console.WriteLine("__________ 5) Enter all roles and names of koristuvachs (through whom) that may be in roles____");
+
             Console.WriteLine(System.String.Join('\n', dataContext.UserAccesses
-                .GroupJoin(
-                dataContext.UsersData,
-                ur => ur.RoleId,
-                ua => ua.Id,
-                (ur, uaGrp) => $"{ur.RoleId}{uaGrp.Count()} {System.String.Join(',', uaGrp.Select(a => a.Name))}")));
+                 .GroupJoin(
+                 dataContext.UsersData,
+                 ur => ur.UserId,
+                 ua => ua.Id,
+                 (ur, uaGrp1) => $"{ur.RoleId} -- {uaGrp1.Count()} -- {System.String.Join(',', uaGrp1.Select(a => a.Name))}")));
             Console.WriteLine("________________________________");
-        }
-        }
+
+        } 
+    }
         }
     
